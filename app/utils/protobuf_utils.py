@@ -24,7 +24,7 @@ def encode_uid(uid: str) -> str:
 
 def decode_info(data: bytes):
     try:
-        info = like_count_pb2.uid_generator()
+        info = like_count_pb2.like_count()
         info.ParseFromString(data)
         return info
     except DecodeError as e:
