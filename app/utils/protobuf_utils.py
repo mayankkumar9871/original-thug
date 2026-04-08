@@ -24,29 +24,19 @@ def encode_uid(uid: str) -> str:
 
 def decode_info(data: bytes):
     try:
-        # 🔥 YAHAN DALNA HAI (parse se pehle)
-        logger.info(f"RAW RESPONSE: {data[:50]}")
-        # Try Info
-        try:
-            info = like_count_pb2.Info()
-            info.ParseFromString(data)
-            logger.info("✅ Decoded with Info")
-            return info
-        except:
-            pass
+        # 🔥 NEW: check if response is not protobuf
+        if data.startswith(b'BR_') or b'invalid' in data or b'NOT_FOUND' in data:
+            logger.error(f"❌ API Error Response: {data}")
+            return None
 
-        # Try UID generator
-        try:
-            info = uid_generator_pb2.uid_generator()
-            info.ParseFromString(data)
-            logger.info("✅ Decoded with uid_generator")
-            return info
-        except:
-            pass
+        info = like_count_pb2.Info()
+        info.ParseFromString(data)
+        return info
 
-        logger.error("❌ Unknown protobuf format")
+    except DecodeError as e:
+        logger.error(f"Error decoding Protobuf data: {e}")
         return None
 
     except Exception as e:
-        logger.error(f"Decode failed: {e}")
+        logger.error(f"Unexpected error during protobuf decoding: {e}")
         return None
