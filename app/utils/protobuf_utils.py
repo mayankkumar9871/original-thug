@@ -37,7 +37,7 @@ def decode_info(data: bytes):
     Returns decoded object or None if decoding fails.
     """
     try:
-        info = like_count_pb2.Info()
+        info = uid_generator_pb2.uid_generator()
         info.ParseFromString(data)
         logger.info("✅ Decoded with Info")
         return info
