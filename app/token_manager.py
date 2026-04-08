@@ -45,7 +45,7 @@ class TokenCache:
             for user in creds:
                 try:
                     params = {'uid': user['uid'], 'password': user['password']}
-                    response = self.session.get(AUTH_URL, params=params, timeout=5)
+                    response = self.session.get(AUTH_URL, params=params, timeout=15)
                     if response.status_code == 200:
                         token = response.json().get("token")
                         if token:
