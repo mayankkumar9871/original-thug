@@ -33,6 +33,8 @@ def encode_uid(uid: str, region=None) -> str:
 
 def decode_info(data: bytes):
     try:
+        logger.info(f"RAW RESPONSE (HEX): {data[:30].hex()}")
+        logger.info(f"RAW RESPONSE (LEN): {len(data)}")
         # Try Info
         try:
             info = like_count_pb2.Info()
