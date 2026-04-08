@@ -10,7 +10,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 logger = logging.getLogger(__name__)
 
-AUTH_URL = os.getenv("AUTH_URL", "http://jwt.thug4ff.xyz/token")
+AUTH_URL = os.getenv("AUTH_URL", "http://jwt.thug4ff.com/token")
 
 CACHE_DURATION = timedelta(hours=7).seconds
 TOKEN_REFRESH_THRESHOLD = timedelta(hours=6).seconds
