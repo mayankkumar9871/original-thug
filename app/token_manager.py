@@ -10,7 +10,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 logger = logging.getLogger(__name__)
 
-AUTH_URL = os.getenv("AUTH_URL", "http://jwt.thug4ff.com/token")
+AUTH_URL = os.getenv("AUTH_URL", "http://jwt.thug4ff.xyz/token")
 
 CACHE_DURATION = timedelta(hours=7).seconds
 TOKEN_REFRESH_THRESHOLD = timedelta(hours=6).seconds
@@ -41,7 +41,7 @@ class TokenCache:
     def _fetch_single(self, user):
         try:
             params = {'uid': user['uid'], 'password': user['password']}
-            response = self.session.get(AUTH_URL, params=params, timeout=10)
+            response = self.session.get(AUTH_URL, params=params, timeout=5)
 
             if response.status_code == 200:
                 data = response.json()
